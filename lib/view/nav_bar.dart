@@ -1,6 +1,55 @@
 import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:window_manager/window_manager.dart';
+import 'package:pcl2_newer/logic/change_body.dart';
+
+class Navbutton extends StatefulWidget {
+  final String buttonText;
+  final IconData iconData;
+  const Navbutton(
+      {super.key, required this.buttonText, required this.iconData});
+  @override
+  State<Navbutton> createState() => _NavbuttonState();
+}
+
+class _NavbuttonState extends State<Navbutton> {
+  bool isHovered = false;
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onHover: (event) => setState(() => isHovered = true),
+      onExit: (event) => setState(() => isHovered = false),
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 200),
+        padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+        margin: EdgeInsets.fromLTRB(8, 4, 8, 4),
+        decoration: BoxDecoration(
+          color: isHovered
+              ? Color.fromARGB(255, 64, 144, 227)
+              : Color.fromARGB(255, 17, 111, 205),
+          borderRadius: BorderRadius.circular(30),
+        ),
+        child: ElevatedButton.icon(
+          onPressed: () {},
+          label: RichText(
+            text: TextSpan(
+              text: widget.buttonText,
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+          icon: Icon(widget.iconData),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.transparent,
+            shadowColor: Colors.transparent,
+            padding: EdgeInsets.zero,
+            minimumSize: const Size(0, 40),
+            iconColor: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+}
 
 class NavBar extends StatefulWidget implements PreferredSizeWidget {
   final double toolbarHeight;
@@ -19,6 +68,32 @@ class _NavBarState extends State<NavBar> with WindowListener {
     } else {
       await windowManager.maximize();
     }
+  }
+
+  MouseRegion titleButton(String buttonText, IconData iconData) {
+    return MouseRegion(
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(6, 0, 6, 0),
+        child: ElevatedButton.icon(
+          onPressed: () {},
+          label: RichText(
+            text: TextSpan(
+              text: buttonText,
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+          icon: Icon(iconData),
+          style: ButtonStyle(
+            backgroundColor: WidgetStateProperty.resolveWith((states) {
+              return states.contains(WidgetState.hovered)
+                  ? Color.fromARGB(255, 64, 144, 227)
+                  : Color.fromARGB(255, 17, 111, 205);
+            }),
+            iconColor: WidgetStateProperty.all(Colors.white),
+          ),
+        ),
+      ),
+    );
   }
 
   @override
@@ -51,32 +126,11 @@ class _NavBarState extends State<NavBar> with WindowListener {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      ElevatedButton.icon(
-                        onPressed: () {},
-                        label: Text("主页"),
-                        icon: Icon(Icons.home),
-                        style: ButtonStyle(),
-                      ),
-                      ElevatedButton.icon(
-                        onPressed: () {},
-                        label: Text("下载"),
-                        icon: Icon(Icons.download),
-                      ),
-                      ElevatedButton.icon(
-                        onPressed: () {},
-                        label: Text("联机"),
-                        icon: Icon(Icons.wifi),
-                      ),
-                      ElevatedButton.icon(
-                        onPressed: () {},
-                        label: Text("设置"),
-                        icon: Icon(Icons.settings),
-                      ),
-                      ElevatedButton.icon(
-                        onPressed: () {},
-                        label: Text("更多"),
-                        icon: Icon(Icons.grid_view),
-                      ),
+                      Navbutton(buttonText: "主页", iconData: Icons.home),
+                      Navbutton(buttonText: "下载", iconData: Icons.download),
+                      Navbutton(buttonText: "联机", iconData: Icons.wifi),
+                      Navbutton(buttonText: "设置", iconData: Icons.settings),
+                      Navbutton(buttonText: "更多", iconData: Icons.grid_view),
                     ],
                   ),
                 ),
@@ -89,14 +143,18 @@ class _NavBarState extends State<NavBar> with WindowListener {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        windowManager.minimize();
+                      },
                       icon: Icon(
                         Icons.horizontal_rule,
                         color: Colors.white,
                       ),
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        windowManager.close();
+                      },
                       icon: Icon(
                         Icons.close,
                         color: Colors.white,
@@ -107,26 +165,6 @@ class _NavBarState extends State<NavBar> with WindowListener {
               )
             ],
           ),
-          // child: Row(
-          //   children: [
-          //     Text(
-          //       "PCL II",
-          //       textAlign: TextAlign.left,
-          //       style: TextStyle(
-          //         color: Colors.white,
-          //         fontSize: 24,
-          //       ),
-          //     ),
-          //     Container(
-          //       margin: EdgeInsetsGeometry.infinity,
-          //       alignment: Alignment.center,
-          //       width: 300,
-          //       child: Row(
-          //         children: [],
-          //       ),
-          //     )
-          //   ],
-          // ),
         ),
       ),
       toolbarHeight: widget.toolbarHeight,
