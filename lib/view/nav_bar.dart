@@ -3,47 +3,71 @@ import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:pcl2_newer/logic/change_body.dart';
 
-class Navbutton extends StatefulWidget {
+///
+/// 导航栏按钮，该按钮不属于可公开的样式，仅在本文件中使用。
+///
+class _Navbutton extends StatefulWidget {
   final String buttonText;
   final IconData iconData;
-  const Navbutton(
-      {super.key, required this.buttonText, required this.iconData});
+  final int index;
+  final Function onPressed;
+
+  const _Navbutton(
+      {required this.index,
+      required this.buttonText,
+      required this.iconData,
+      required this.onPressed});
   @override
-  State<Navbutton> createState() => _NavbuttonState();
+  State<_Navbutton> createState() => _NavbuttonState();
 }
 
-class _NavbuttonState extends State<Navbutton> {
+///
+/// 导航栏按钮的状态，用于管理导航栏按钮的状态，包括鼠标悬停、点击等的状态。
+///
+class _NavbuttonState extends State<_Navbutton> {
   bool isHovered = false;
+
+  ///
+  /// 构建导航栏按钮的UI，包括鼠标悬停、点击等的状态。
+  ///
   @override
   Widget build(BuildContext context) {
+    ///
+    /// 在鼠标悬停时，设置isHovered的属性。
+    ///
+    final backColor = isHovered
+        ? Color.fromARGB(255, 64, 144, 227)
+        : Color.fromARGB(255, 17, 111, 205);
+    final activeBackColor = Colors.white;
+    final fontColor =
+        widget.index == page ? Color.fromARGB(255, 64, 144, 227) : Colors.white;
     return MouseRegion(
+      cursor: SystemMouseCursors.click,
       onHover: (event) => setState(() => isHovered = true),
       onExit: (event) => setState(() => isHovered = false),
       child: AnimatedContainer(
         duration: Duration(milliseconds: 200),
-        padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
-        margin: EdgeInsets.fromLTRB(8, 4, 8, 4),
+        // padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+        margin: EdgeInsets.fromLTRB(8, 0, 8, 0),
         decoration: BoxDecoration(
-          color: isHovered
-              ? Color.fromARGB(255, 64, 144, 227)
-              : Color.fromARGB(255, 17, 111, 205),
+          color: widget.index == page ? activeBackColor : backColor,
           borderRadius: BorderRadius.circular(30),
         ),
         child: ElevatedButton.icon(
-          onPressed: () {},
+          onPressed: widget.onPressed as void Function()?,
           label: RichText(
             text: TextSpan(
               text: widget.buttonText,
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: fontColor),
             ),
           ),
           icon: Icon(widget.iconData),
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.transparent,
             shadowColor: Colors.transparent,
-            padding: EdgeInsets.zero,
+            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
             minimumSize: const Size(0, 40),
-            iconColor: Colors.white,
+            iconColor: fontColor,
           ),
         ),
       ),
@@ -68,32 +92,6 @@ class _NavBarState extends State<NavBar> with WindowListener {
     } else {
       await windowManager.maximize();
     }
-  }
-
-  MouseRegion titleButton(String buttonText, IconData iconData) {
-    return MouseRegion(
-      child: Padding(
-        padding: EdgeInsets.fromLTRB(6, 0, 6, 0),
-        child: ElevatedButton.icon(
-          onPressed: () {},
-          label: RichText(
-            text: TextSpan(
-              text: buttonText,
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-          icon: Icon(iconData),
-          style: ButtonStyle(
-            backgroundColor: WidgetStateProperty.resolveWith((states) {
-              return states.contains(WidgetState.hovered)
-                  ? Color.fromARGB(255, 64, 144, 227)
-                  : Color.fromARGB(255, 17, 111, 205);
-            }),
-            iconColor: WidgetStateProperty.all(Colors.white),
-          ),
-        ),
-      ),
-    );
   }
 
   @override
@@ -126,11 +124,36 @@ class _NavBarState extends State<NavBar> with WindowListener {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Navbutton(buttonText: "主页", iconData: Icons.home),
-                      Navbutton(buttonText: "下载", iconData: Icons.download),
-                      Navbutton(buttonText: "联机", iconData: Icons.wifi),
-                      Navbutton(buttonText: "设置", iconData: Icons.settings),
-                      Navbutton(buttonText: "更多", iconData: Icons.grid_view),
+                      _Navbutton(
+                        index: 1,
+                        buttonText: "主页",
+                        iconData: Icons.home,
+                        onPressed: () => setState(() => page = 1),
+                      ),
+                      _Navbutton(
+                        index: 2,
+                        buttonText: "下载",
+                        iconData: Icons.download,
+                        onPressed: () => setState(() => page = 2),
+                      ),
+                      _Navbutton(
+                        index: 3,
+                        buttonText: "联机",
+                        iconData: Icons.wifi,
+                        onPressed: () => setState(() => page = 3),
+                      ),
+                      _Navbutton(
+                        index: 4,
+                        buttonText: "设置",
+                        iconData: Icons.settings,
+                        onPressed: () => setState(() => page = 4),
+                      ),
+                      _Navbutton(
+                        index: 5,
+                        buttonText: "更多",
+                        iconData: Icons.grid_view,
+                        onPressed: () => setState(() => page = 5),
+                      ),
                     ],
                   ),
                 ),
