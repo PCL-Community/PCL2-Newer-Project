@@ -39,12 +39,10 @@ class _NavbuttonState extends State<_Navbutton> {
         ? Color.fromARGB(255, 64, 144, 227)
         : Color.fromARGB(255, 17, 111, 205);
     final activeBackColor = Colors.white;
-    final fontColor =
-        widget.index == page ? Color.fromARGB(255, 64, 144, 227) : Colors.white;
+    final fontColor = widget.index == currentPage
+        ? Color.fromARGB(255, 64, 144, 227)
+        : Colors.white;
     return MouseRegion(
-      cursor: widget.index == page
-          ? SystemMouseCursors.click
-          : SystemMouseCursors.basic,
       onHover: (event) => setState(() => isHovered = true),
       onExit: (event) => setState(() => isHovered = false),
       child: AnimatedContainer(
@@ -54,11 +52,16 @@ class _NavbuttonState extends State<_Navbutton> {
         margin: EdgeInsets.fromLTRB(4, 0, 4, 0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
-          color: widget.index == page ? activeBackColor : backColor,
+          color: widget.index == currentPage ? activeBackColor : backColor,
         ),
         child: TextButton(
           onPressed: () => widget.onPressed(),
           style: ButtonStyle(
+            mouseCursor: WidgetStateProperty.all(
+              widget.index == currentPage
+                  ? SystemMouseCursors.basic
+                  : SystemMouseCursors.click,
+            ),
             splashFactory: NoSplash.splashFactory,
             overlayColor: WidgetStateProperty.all(Colors.transparent),
           ),
@@ -158,31 +161,31 @@ class _NavBarState extends State<NavBar> with WindowListener {
                           index: 1,
                           buttonText: "主页",
                           iconData: Icons.home,
-                          onPressed: () => setState(() => page = 1),
+                          onPressed: () => setState(() => currentPage = 1),
                         ),
                         _Navbutton(
                           index: 2,
                           buttonText: "下载",
                           iconData: Icons.download,
-                          onPressed: () => setState(() => page = 2),
+                          onPressed: () => setState(() => currentPage = 2),
                         ),
                         _Navbutton(
                           index: 3,
                           buttonText: "联机",
                           iconData: Icons.wifi,
-                          onPressed: () => setState(() => page = 3),
+                          onPressed: () => setState(() => currentPage = 3),
                         ),
                         _Navbutton(
                           index: 4,
                           buttonText: "设置",
                           iconData: Icons.settings,
-                          onPressed: () => setState(() => page = 4),
+                          onPressed: () => setState(() => currentPage = 4),
                         ),
                         _Navbutton(
                           index: 5,
                           buttonText: "更多",
                           iconData: Icons.grid_view,
-                          onPressed: () => setState(() => page = 5),
+                          onPressed: () => setState(() => currentPage = 5),
                         ),
                       ],
                     ),

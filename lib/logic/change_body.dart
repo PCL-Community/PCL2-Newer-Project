@@ -1,1 +1,1 @@
-var page = 0;
+var currentPage = 1;
