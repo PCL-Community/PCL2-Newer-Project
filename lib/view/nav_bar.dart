@@ -42,34 +42,65 @@ class _NavbuttonState extends State<_Navbutton> {
     final fontColor =
         widget.index == page ? Color.fromARGB(255, 64, 144, 227) : Colors.white;
     return MouseRegion(
-      cursor: SystemMouseCursors.click,
+      cursor: widget.index == page
+          ? SystemMouseCursors.click
+          : SystemMouseCursors.basic,
       onHover: (event) => setState(() => isHovered = true),
       onExit: (event) => setState(() => isHovered = false),
       child: AnimatedContainer(
+        height: 28,
+        width: 80,
         duration: Duration(milliseconds: 200),
-        // padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-        margin: EdgeInsets.fromLTRB(8, 0, 8, 0),
+        margin: EdgeInsets.fromLTRB(4, 0, 4, 0),
         decoration: BoxDecoration(
-          color: widget.index == page ? activeBackColor : backColor,
           borderRadius: BorderRadius.circular(30),
+          color: widget.index == page ? activeBackColor : backColor,
         ),
-        child: ElevatedButton.icon(
-          onPressed: widget.onPressed as void Function()?,
-          label: RichText(
-            text: TextSpan(
-              text: widget.buttonText,
-              style: TextStyle(color: fontColor),
-            ),
+        child: TextButton(
+          onPressed: () => widget.onPressed(),
+          style: ButtonStyle(
+            splashFactory: NoSplash.splashFactory,
+            overlayColor: WidgetStateProperty.all(Colors.transparent),
           ),
-          icon: Icon(widget.iconData),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.transparent,
-            shadowColor: Colors.transparent,
-            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-            minimumSize: const Size(0, 40),
-            iconColor: fontColor,
+          // margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                widget.iconData,
+                color: fontColor,
+                size: 16,
+              ),
+              Text(
+                "  ${widget.buttonText}",
+                style: TextStyle(
+                  fontSize: 14,
+                  color: fontColor,
+                ),
+              ),
+            ],
           ),
         ),
+        // child: ElevatedButton.icon(
+        //   onPressed: widget.onPressed as void Function(),
+        //   label: RichText(
+        //     text: TextSpan(
+        //       text: widget.buttonText,
+        //       style: TextStyle(color: fontColor),
+        //     ),
+        //   ),
+        //   icon: Icon(widget.iconData),
+        //   style: ElevatedButton.styleFrom(
+        //     backgroundColor: Colors.transparent,
+        //     shadowColor: Colors.transparent,
+        //     padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+        //     minimumSize: const Size(0, 40),
+        //     iconColor: fontColor,
+        //     overlayColor: Colors.transparent,
+        //     splashFactory: NoSplash.splashFactory,
+        //     enableFeedback: false,
+        //   ),
+        // ),
       ),
     );
   }
