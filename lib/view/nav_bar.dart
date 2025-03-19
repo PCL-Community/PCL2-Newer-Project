@@ -62,7 +62,6 @@ class _NavbuttonState extends State<_Navbutton> {
             splashFactory: NoSplash.splashFactory,
             overlayColor: WidgetStateProperty.all(Colors.transparent),
           ),
-          // margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -81,26 +80,6 @@ class _NavbuttonState extends State<_Navbutton> {
             ],
           ),
         ),
-        // child: ElevatedButton.icon(
-        //   onPressed: widget.onPressed as void Function(),
-        //   label: RichText(
-        //     text: TextSpan(
-        //       text: widget.buttonText,
-        //       style: TextStyle(color: fontColor),
-        //     ),
-        //   ),
-        //   icon: Icon(widget.iconData),
-        //   style: ElevatedButton.styleFrom(
-        //     backgroundColor: Colors.transparent,
-        //     shadowColor: Colors.transparent,
-        //     padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-        //     minimumSize: const Size(0, 40),
-        //     iconColor: fontColor,
-        //     overlayColor: Colors.transparent,
-        //     splashFactory: NoSplash.splashFactory,
-        //     enableFeedback: false,
-        //   ),
-        // ),
       ),
     );
   }
@@ -125,104 +104,123 @@ class _NavBarState extends State<NavBar> with WindowListener {
     }
   }
 
+  ///
+  /// 构建导航栏的UI，包括导航栏的标题、按钮等的属性。
+  /// 不过在里面使用了两个Position属性来区分哪个是背景，哪个是组件（都用了绝对位置
+  ///
+  ///
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: GestureDetector(
-        behavior: HitTestBehavior.translucent,
-        onPanStart: (_) => windowManager.startDragging(),
-        onDoubleTap: () => _toggleMaximize(),
-        child: SizedBox(
-          width: double.infinity,
-          height: widget.toolbarHeight,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                alignment: Alignment.centerLeft,
-                width: 100,
-                height: widget.toolbarHeight,
-                child: Text(
-                  "PCL II",
-                  style: TextStyle(
-                    fontSize: 24,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              Expanded(
-                child: SizedBox(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      _Navbutton(
-                        index: 1,
-                        buttonText: "主页",
-                        iconData: Icons.home,
-                        onPressed: () => setState(() => page = 1),
-                      ),
-                      _Navbutton(
-                        index: 2,
-                        buttonText: "下载",
-                        iconData: Icons.download,
-                        onPressed: () => setState(() => page = 2),
-                      ),
-                      _Navbutton(
-                        index: 3,
-                        buttonText: "联机",
-                        iconData: Icons.wifi,
-                        onPressed: () => setState(() => page = 3),
-                      ),
-                      _Navbutton(
-                        index: 4,
-                        buttonText: "设置",
-                        iconData: Icons.settings,
-                        onPressed: () => setState(() => page = 4),
-                      ),
-                      _Navbutton(
-                        index: 5,
-                        buttonText: "更多",
-                        iconData: Icons.grid_view,
-                        onPressed: () => setState(() => page = 5),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                alignment: Alignment.centerRight,
-                width: 100,
-                height: widget.toolbarHeight,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        windowManager.minimize();
-                      },
-                      icon: Icon(
-                        Icons.horizontal_rule,
-                        color: Colors.white,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        windowManager.close();
-                      },
-                      icon: Icon(
-                        Icons.close,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
       toolbarHeight: widget.toolbarHeight,
       backgroundColor: Color.fromARGB(255, 17, 111, 205),
+      title: SizedBox(
+        width: double.infinity,
+        height: widget.toolbarHeight,
+        child: Stack(
+          children: [
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onPanStart: (_) => windowManager.startDragging(),
+                onDoubleTap: () => _toggleMaximize(),
+              ),
+            ),
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    width: 100,
+                    height: widget.toolbarHeight,
+                    child: Text(
+                      "PCL II",
+                      style: TextStyle(
+                        fontSize: 24,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        _Navbutton(
+                          index: 1,
+                          buttonText: "主页",
+                          iconData: Icons.home,
+                          onPressed: () => setState(() => page = 1),
+                        ),
+                        _Navbutton(
+                          index: 2,
+                          buttonText: "下载",
+                          iconData: Icons.download,
+                          onPressed: () => setState(() => page = 2),
+                        ),
+                        _Navbutton(
+                          index: 3,
+                          buttonText: "联机",
+                          iconData: Icons.wifi,
+                          onPressed: () => setState(() => page = 3),
+                        ),
+                        _Navbutton(
+                          index: 4,
+                          buttonText: "设置",
+                          iconData: Icons.settings,
+                          onPressed: () => setState(() => page = 4),
+                        ),
+                        _Navbutton(
+                          index: 5,
+                          buttonText: "更多",
+                          iconData: Icons.grid_view,
+                          onPressed: () => setState(() => page = 5),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.centerRight,
+                    width: 100,
+                    height: widget.toolbarHeight,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            windowManager.minimize();
+                          },
+                          icon: Icon(
+                            Icons.horizontal_rule,
+                            color: Colors.white,
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            windowManager.close();
+                          },
+                          icon: Icon(
+                            Icons.close,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
