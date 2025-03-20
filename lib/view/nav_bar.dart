@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:pcl2_newer/logic/change_body.dart';
 
-///
-/// 导航栏按钮，该按钮不属于可公开的样式，仅在本文件中使用。
-///
 class _Navbutton extends StatefulWidget {
   final String buttonText;
   final IconData iconData;
@@ -21,20 +18,21 @@ class _Navbutton extends StatefulWidget {
   State<_Navbutton> createState() => _NavbuttonState();
 }
 
-///
-/// 导航栏按钮的状态，用于管理导航栏按钮的状态，包括鼠标悬停、点击等的状态。
-///
 class _NavbuttonState extends State<_Navbutton> {
-  bool isHovered = false;
+  int currentPage = 1;
+  @override
+  void initState() {
+    super.initState();
+    myListener.addListener(() {
+      setState(() {
+        currentPage = myListener.currentPage;
+      });
+    });
+  }
 
-  ///
-  /// 构建导航栏按钮的UI，包括鼠标悬停、点击等的状态。
-  ///
+  bool isHovered = false;
   @override
   Widget build(BuildContext context) {
-    ///
-    /// 在鼠标悬停时，设置isHovered的属性。
-    ///
     final backColor = isHovered
         ? Color.fromARGB(255, 64, 144, 227)
         : Color.fromARGB(255, 17, 111, 205);
@@ -107,11 +105,6 @@ class _NavBarState extends State<NavBar> with WindowListener {
     }
   }
 
-  ///
-  /// 构建导航栏的UI，包括导航栏的标题、按钮等的属性。
-  /// 不过在里面使用了两个Position属性来区分哪个是背景，哪个是组件（都用了绝对位置
-  ///
-  ///
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -161,31 +154,31 @@ class _NavBarState extends State<NavBar> with WindowListener {
                           index: 1,
                           buttonText: "主页",
                           iconData: Icons.home,
-                          onPressed: () => setState(() => currentPage = 1),
+                          onPressed: () => myListener.setCurrentPage(1),
                         ),
                         _Navbutton(
                           index: 2,
                           buttonText: "下载",
                           iconData: Icons.download,
-                          onPressed: () => setState(() => currentPage = 2),
+                          onPressed: () => myListener.setCurrentPage(2),
                         ),
                         _Navbutton(
                           index: 3,
                           buttonText: "联机",
                           iconData: Icons.wifi,
-                          onPressed: () => setState(() => currentPage = 3),
+                          onPressed: () => myListener.setCurrentPage(3),
                         ),
                         _Navbutton(
                           index: 4,
                           buttonText: "设置",
                           iconData: Icons.settings,
-                          onPressed: () => setState(() => currentPage = 4),
+                          onPressed: () => myListener.setCurrentPage(4),
                         ),
                         _Navbutton(
                           index: 5,
                           buttonText: "更多",
                           iconData: Icons.grid_view,
-                          onPressed: () => setState(() => currentPage = 5),
+                          onPressed: () => myListener.setCurrentPage(5),
                         ),
                       ],
                     ),
