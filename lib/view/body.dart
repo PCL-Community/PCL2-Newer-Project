@@ -33,6 +33,7 @@ class _BodyState extends State<Body> {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
     return Stack(
       children: [
         TransitionPage(
@@ -40,6 +41,8 @@ class _BodyState extends State<Body> {
           onAfterLeave: () {
             changePage(forwardPage);
           },
+          offset: Offset(-300, 0),
+          opacity: 0,
           child: Container(
             width: 300,
             height: double.infinity,
@@ -51,6 +54,8 @@ class _BodyState extends State<Body> {
           onAfterLeave: () {
             changePage(forwardPage);
           },
+          offset: Offset(-100, 0),
+          opacity: 0,
           child: Container(
             width: 100,
             height: double.infinity,
@@ -62,6 +67,8 @@ class _BodyState extends State<Body> {
           onAfterLeave: () {
             changePage(forwardPage);
           },
+          offset: Offset(-100, 0),
+          opacity: 0,
           child: Container(
             width: 100,
             height: double.infinity,
@@ -73,6 +80,8 @@ class _BodyState extends State<Body> {
           onAfterLeave: () {
             changePage(forwardPage);
           },
+          offset: Offset(-100, 0),
+          opacity: 0,
           child: Container(
             width: 100,
             height: double.infinity,
@@ -84,10 +93,18 @@ class _BodyState extends State<Body> {
           onAfterLeave: () {
             changePage(forwardPage);
           },
+          offset: Offset(-100, 0),
+          opacity: 0,
           child: Container(
             width: 100,
             height: double.infinity,
             color: Colors.purple,
+            child: TextButton(
+              onPressed: () {
+                print("Hello World!!");
+              },
+              child: const Text('test'),
+            ),
           ),
         ),
       ],
