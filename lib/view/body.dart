@@ -46,7 +46,20 @@ class _BodyState extends State<Body> {
           child: Container(
             width: 300,
             height: double.infinity,
-            color: Colors.red,
+            color: Color.fromARGB(255, 245, 248, 252),
+          ),
+        ),
+        TransitionPage(
+          visible: currentPage == 1,
+          onAfterLeave: () {
+            changePage(forwardPage);
+          },
+          offset: Offset(0, -screenSize.height),
+          opacity: 0,
+          child: Container(
+            margin: EdgeInsets.fromLTRB(300, 0, 0, 0),
+            width: screenSize.width - 300,
+            height: double.infinity,
           ),
         ),
         TransitionPage(
@@ -54,12 +67,25 @@ class _BodyState extends State<Body> {
           onAfterLeave: () {
             changePage(forwardPage);
           },
-          offset: Offset(-100, 0),
+          offset: Offset(-150, 0),
           opacity: 0,
           child: Container(
-            width: 100,
+            width: 150,
             height: double.infinity,
-            color: Colors.yellow,
+            color: Color.fromARGB(255, 245, 248, 252),
+          ),
+        ),
+        TransitionPage(
+          visible: currentPage == 2,
+          onAfterLeave: () {
+            changePage(forwardPage);
+          },
+          offset: Offset(0, -screenSize.height),
+          opacity: 0,
+          child: Container(
+            margin: EdgeInsets.fromLTRB(150, 0, 0, 0),
+            width: screenSize.width - 150,
+            height: double.infinity,
           ),
         ),
         TransitionPage(
@@ -67,12 +93,25 @@ class _BodyState extends State<Body> {
           onAfterLeave: () {
             changePage(forwardPage);
           },
-          offset: Offset(-100, 0),
+          offset: Offset(-122, 0),
           opacity: 0,
           child: Container(
-            width: 100,
+            width: 122,
             height: double.infinity,
-            color: Colors.blue,
+            color: Color.fromARGB(255, 245, 248, 252),
+          ),
+        ),
+        TransitionPage(
+          visible: currentPage == 3,
+          onAfterLeave: () {
+            changePage(forwardPage);
+          },
+          offset: Offset(0, -screenSize.height),
+          opacity: 0,
+          child: Container(
+            margin: EdgeInsets.fromLTRB(122, 0, 0, 0),
+            width: screenSize.width - 122,
+            height: double.infinity,
           ),
         ),
         TransitionPage(
@@ -80,12 +119,25 @@ class _BodyState extends State<Body> {
           onAfterLeave: () {
             changePage(forwardPage);
           },
-          offset: Offset(-100, 0),
+          offset: Offset(-122, 0),
           opacity: 0,
           child: Container(
-            width: 100,
+            width: 122,
             height: double.infinity,
-            color: Colors.green,
+            color: Color.fromARGB(255, 245, 248, 252),
+          ),
+        ),
+        TransitionPage(
+          visible: currentPage == 4,
+          onAfterLeave: () {
+            changePage(forwardPage);
+          },
+          offset: Offset(0, -screenSize.height),
+          opacity: 0,
+          child: Container(
+            margin: EdgeInsets.fromLTRB(122, 0, 0, 0),
+            width: screenSize.width - 122,
+            height: double.infinity,
           ),
         ),
         TransitionPage(
@@ -93,18 +145,25 @@ class _BodyState extends State<Body> {
           onAfterLeave: () {
             changePage(forwardPage);
           },
-          offset: Offset(-100, 0),
+          offset: Offset(-150, 0),
           opacity: 0,
           child: Container(
-            width: 100,
+            width: 150,
             height: double.infinity,
-            color: Colors.purple,
-            child: TextButton(
-              onPressed: () {
-                print("Hello World!!");
-              },
-              child: const Text('test'),
-            ),
+            color: Color.fromARGB(255, 245, 248, 252),
+          ),
+        ),
+        TransitionPage(
+          visible: currentPage == 5,
+          onAfterLeave: () {
+            changePage(forwardPage);
+          },
+          offset: Offset(0, -screenSize.height),
+          opacity: 0,
+          child: Container(
+            margin: EdgeInsets.fromLTRB(150, 0, 0, 0),
+            width: screenSize.width - 150,
+            height: double.infinity,
           ),
         ),
       ],

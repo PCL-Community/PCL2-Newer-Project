@@ -47,6 +47,7 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 203, 224, 247),
       appBar: NavBar(),
       body: Body(),
     );
