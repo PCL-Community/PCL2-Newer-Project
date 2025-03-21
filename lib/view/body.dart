@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pcl2_newer/logic/change_body.dart';
 import 'package:pcl2_newer/components/other/transition_page.dart';
+import 'package:pcl2_newer/view/about/left.dart';
+import 'package:pcl2_newer/view/download/left.dart';
+import 'package:pcl2_newer/view/home/left.dart';
+import 'package:pcl2_newer/view/online/left.dart';
+import 'package:pcl2_newer/view/setting/left.dart';
 
 class Body extends StatefulWidget {
   const Body({super.key});
@@ -47,6 +52,7 @@ class _BodyState extends State<Body> {
             width: 300,
             height: double.infinity,
             color: Color.fromARGB(255, 245, 248, 252),
+            child: HomeLeft(),
           ),
         ),
         TransitionPage(
@@ -73,6 +79,7 @@ class _BodyState extends State<Body> {
             width: 150,
             height: double.infinity,
             color: Color.fromARGB(255, 245, 248, 252),
+            child: DownloadLeft(),
           ),
         ),
         TransitionPage(
@@ -99,6 +106,7 @@ class _BodyState extends State<Body> {
             width: 122,
             height: double.infinity,
             color: Color.fromARGB(255, 245, 248, 252),
+            child: OnlineLeft(),
           ),
         ),
         TransitionPage(
@@ -125,6 +133,7 @@ class _BodyState extends State<Body> {
             width: 122,
             height: double.infinity,
             color: Color.fromARGB(255, 245, 248, 252),
+            child: SettingLeft(),
           ),
         ),
         TransitionPage(
@@ -151,6 +160,7 @@ class _BodyState extends State<Body> {
             width: 150,
             height: double.infinity,
             color: Color.fromARGB(255, 245, 248, 252),
+            child: AboutLeft(),
           ),
         ),
         TransitionPage(
