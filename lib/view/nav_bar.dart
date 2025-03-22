@@ -20,22 +20,28 @@ class _Navbutton extends StatefulWidget {
 
 class _NavbuttonState extends State<_Navbutton> {
   int currentPage = 1;
+
+  void updateListen() {
+    setState(() {
+      currentPage = currentPageListen.value; 
+    });
+  }
   @override
   void initState() {
     super.initState();
-    myListener.addListener(() {
-      setState(() {
-        currentPage = myListener.currentPage;
-      });
-    });
+    currentPageListen.addListener(updateListen);
   }
-
+  @override
+  void dispose() {
+    currentPageListen.removeListener(updateListen);
+    super.dispose();
+  }
   bool isHovered = false;
   @override
   Widget build(BuildContext context) {
     final backColor = isHovered
         ? Color.fromARGB(255, 64, 144, 227)
-        : Color.fromARGB(255, 17, 111, 205);
+        : Colors.transparent;
     final activeBackColor = Colors.white;
     final fontColor = widget.index == currentPage
         ? Color.fromARGB(255, 64, 144, 227)
@@ -154,31 +160,31 @@ class _NavBarState extends State<NavBar> with WindowListener {
                           index: 1,
                           buttonText: "主页",
                           iconData: Icons.home,
-                          onPressed: () => myListener.setCurrentPage(1),
+                          onPressed: () => currentPageListen.value = 1,
                         ),
                         _Navbutton(
                           index: 2,
                           buttonText: "下载",
                           iconData: Icons.download,
-                          onPressed: () => myListener.setCurrentPage(2),
+                          onPressed: () => currentPageListen.value = 2,
                         ),
                         _Navbutton(
                           index: 3,
                           buttonText: "联机",
                           iconData: Icons.wifi,
-                          onPressed: () => myListener.setCurrentPage(3),
+                          onPressed: () => currentPageListen.value = 3,
                         ),
                         _Navbutton(
                           index: 4,
                           buttonText: "设置",
                           iconData: Icons.settings,
-                          onPressed: () => myListener.setCurrentPage(4),
+                          onPressed: () => currentPageListen.value = 4,
                         ),
                         _Navbutton(
                           index: 5,
                           buttonText: "更多",
                           iconData: Icons.grid_view,
-                          onPressed: () => myListener.setCurrentPage(5),
+                          onPressed: () => currentPageListen.value = 5,
                         ),
                       ],
                     ),

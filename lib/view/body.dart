@@ -17,23 +17,21 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   int currentPage = 1;
   int forwardPage = 1;
+  void updateListen() {
+    setState(() {
+      currentPage = 0;
+      forwardPage = currentPageListen.value;
+    });
+  }
   @override
   void initState() {
     super.initState();
-    myListener.addListener(
-      () => setState(
-        () {
-          currentPage = 0;
-          forwardPage = myListener.currentPage;
-        },
-      ),
-    );
+    currentPageListen.addListener(updateListen);
   }
-
-  void changePage(int index) {
-    setState(() {
-      currentPage = index;
-    });
+  @override
+  void dispose() {
+    currentPageListen.removeListener(updateListen);
+    super.dispose();
   }
 
   @override
@@ -43,9 +41,7 @@ class _BodyState extends State<Body> {
       children: [
         TransitionPage(
           visible: currentPage == 1,
-          onAfterLeave: () {
-            changePage(forwardPage);
-          },
+          onAfterLeave: () => setState(() => currentPage = forwardPage),
           offset: Offset(-300, 0),
           opacity: 0,
           child: Container(
@@ -57,9 +53,7 @@ class _BodyState extends State<Body> {
         ),
         TransitionPage(
           visible: currentPage == 1,
-          onAfterLeave: () {
-            changePage(forwardPage);
-          },
+          onAfterLeave: () => setState(() => currentPage = forwardPage),
           offset: Offset(0, -screenSize.height),
           opacity: 0,
           child: Container(
@@ -70,9 +64,7 @@ class _BodyState extends State<Body> {
         ),
         TransitionPage(
           visible: currentPage == 2,
-          onAfterLeave: () {
-            changePage(forwardPage);
-          },
+          onAfterLeave: () => setState(() => currentPage = forwardPage),
           offset: Offset(-150, 0),
           opacity: 0,
           child: Container(
@@ -84,9 +76,7 @@ class _BodyState extends State<Body> {
         ),
         TransitionPage(
           visible: currentPage == 2,
-          onAfterLeave: () {
-            changePage(forwardPage);
-          },
+          onAfterLeave: () => setState(() => currentPage = forwardPage),
           offset: Offset(0, -screenSize.height),
           opacity: 0,
           child: Container(
@@ -97,9 +87,7 @@ class _BodyState extends State<Body> {
         ),
         TransitionPage(
           visible: currentPage == 3,
-          onAfterLeave: () {
-            changePage(forwardPage);
-          },
+          onAfterLeave: () => setState(() => currentPage = forwardPage),
           offset: Offset(-122, 0),
           opacity: 0,
           child: Container(
@@ -111,9 +99,7 @@ class _BodyState extends State<Body> {
         ),
         TransitionPage(
           visible: currentPage == 3,
-          onAfterLeave: () {
-            changePage(forwardPage);
-          },
+          onAfterLeave: () => setState(() => currentPage = forwardPage),
           offset: Offset(0, -screenSize.height),
           opacity: 0,
           child: Container(
@@ -124,9 +110,7 @@ class _BodyState extends State<Body> {
         ),
         TransitionPage(
           visible: currentPage == 4,
-          onAfterLeave: () {
-            changePage(forwardPage);
-          },
+          onAfterLeave: () => setState(() => currentPage = forwardPage),
           offset: Offset(-122, 0),
           opacity: 0,
           child: Container(
@@ -138,9 +122,7 @@ class _BodyState extends State<Body> {
         ),
         TransitionPage(
           visible: currentPage == 4,
-          onAfterLeave: () {
-            changePage(forwardPage);
-          },
+          onAfterLeave: () => setState(() => currentPage = forwardPage),
           offset: Offset(0, -screenSize.height),
           opacity: 0,
           child: Container(
@@ -151,9 +133,7 @@ class _BodyState extends State<Body> {
         ),
         TransitionPage(
           visible: currentPage == 5,
-          onAfterLeave: () {
-            changePage(forwardPage);
-          },
+          onAfterLeave: () => setState(() => currentPage = forwardPage),
           offset: Offset(-150, 0),
           opacity: 0,
           child: Container(
@@ -165,9 +145,7 @@ class _BodyState extends State<Body> {
         ),
         TransitionPage(
           visible: currentPage == 5,
-          onAfterLeave: () {
-            changePage(forwardPage);
-          },
+          onAfterLeave: () => setState(() => currentPage = forwardPage),
           offset: Offset(0, -screenSize.height),
           opacity: 0,
           child: Container(

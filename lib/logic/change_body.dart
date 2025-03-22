@@ -1,13 +1,5 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class MyListener extends ChangeNotifier {
-  int currentPage = 1;
-  int get getCurrentPage => currentPage;
-
-  void setCurrentPage(int page) {
-    currentPage = page;
-    notifyListeners();
-  }
-}
-
-MyListener myListener = MyListener();
+final ValueNotifier<int> currentPageListen = ValueNotifier<int>(1);
+final ValueNotifier<int> currentAccountListen = ValueNotifier<int>(1);
