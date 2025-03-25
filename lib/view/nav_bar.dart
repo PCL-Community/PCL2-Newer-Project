@@ -147,7 +147,7 @@ class _NavBarState extends State<NavBar> with WindowListener {
                     child: Text(
                       "PCL II",
                       style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 20,
                         color: Colors.white,
                       ),
                     ),

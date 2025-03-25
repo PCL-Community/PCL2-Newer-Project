@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
         colorScheme:
             ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 203, 224, 247)),
         useMaterial3: true,
+        fontFamily: "PCL-English"
       ),
       home: const MyHomePage(),
     );
