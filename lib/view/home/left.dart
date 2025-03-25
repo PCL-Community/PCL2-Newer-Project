@@ -41,22 +41,39 @@ class _HomeLeftState extends State<HomeLeft> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 MyCheckButton(
-                  iconData: Icons.all_out,
+                  iconData: Icons.shield_moon,
                   text: "正版",
                   index: 1,
                   onPressed: () => currentAccountListen.value = 1,
                   isChecked: currentAccountListen.value == 1,
                 ),
                 MyCheckButton(
-                  iconData: Icons.all_inbox,
+                  iconData: Icons.medication_outlined,
                   text: "离线",
                   index: 2,
                   onPressed: () => currentAccountListen.value = 2,
                   isChecked: currentAccountListen.value == 2,
                 ),
+                MyCheckButton(
+                  iconData: Icons.account_box_rounded,
+                  text: "外置",
+                  index: 3,
+                  onPressed: () => currentAccountListen.value = 3,
+                  isChecked: currentAccountListen.value == 3,
+                ),
               ],
             ),
           ),
+        ),
+        Expanded(
+          child: Container(
+            color: Colors.blue,
+          )
+        ),
+        Container(
+          width: 300,
+          height: 120,
+          color: Colors.amber,
         ),
       ],
     );
