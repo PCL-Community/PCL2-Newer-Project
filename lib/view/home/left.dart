@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pcl2_newer/components/button/my_check_button.dart';
 import 'package:pcl2_newer/components/button/my_normal_button.dart';
+import 'package:pcl2_newer/components/other/transition_page.dart';
 import 'package:pcl2_newer/logic/change_body.dart';
+import 'package:pcl2_newer/view/home/content/microsoft.dart';
+import 'package:pcl2_newer/view/home/content/offline.dart';
+import 'package:pcl2_newer/view/home/content/thirdparty.dart';
 
 class HomeLeft extends StatefulWidget {
   const HomeLeft({super.key});
@@ -67,14 +71,44 @@ class _HomeLeftState extends State<HomeLeft> {
           ),
         ),
         Expanded(
-          child: Center(
-            child: MyNormalButton(
-              width: 120,
-              height: 120,
-              onClick: () {},
-              child: Text("HelloWorld!"),
-            ),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 100,
+                width: 300,
+                child: Stack(
+                  children: [
+                    TransitionPage(
+                      visible: currentAccount == 1,
+                      onAfterLeave: () => setState(() => currentAccount = forwardAccount),
+                      opacity: 0,
+                      child: Microsoft(),
+                    ),
+                    TransitionPage(
+                      visible: currentAccount == 2,
+                      onAfterLeave: () => setState(() => currentAccount = forwardAccount),
+                      opacity: 0,
+                      child: Offline(),
+                    ),
+                    TransitionPage(
+                      visible: currentAccount == 3,
+                      onAfterLeave: () => setState(() => currentAccount = forwardAccount),
+                      opacity: 0,
+                      child: Thirdparty(),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
+          // child: Center(
+          //   child: MyNormalButton(
+          //     width: 120,
+          //     height: 120,
+          //     onClick: () {},
+          //     child: Text("HelloWorld!"),
+          //   ),
+          // ),
         ),
         Container(
           width: 300,
