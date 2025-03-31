@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pcl2_newer/components/button/my_check_button.dart';
+import 'package:pcl2_newer/components/button/my_normal_button.dart';
 import 'package:pcl2_newer/logic/change_body.dart';
 
 class HomeLeft extends StatefulWidget {
@@ -66,9 +67,14 @@ class _HomeLeftState extends State<HomeLeft> {
           ),
         ),
         Expanded(
-          child: Container(
-            color: Colors.blue,
-          )
+          child: Center(
+            child: MyNormalButton(
+              width: 120,
+              height: 120,
+              onClick: () {},
+              child: Text("HelloWorld!"),
+            ),
+          ),
         ),
         Container(
           width: 300,
