@@ -1,4 +1,4 @@
-<img src="assets/logo.png">
+![logo](assets/logo.png)
 
 # PCL II Newer Project
 
