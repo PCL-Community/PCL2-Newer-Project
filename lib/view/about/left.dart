@@ -10,8 +10,6 @@ class AboutLeft extends StatefulWidget {
 class _AboutLeftState extends State<AboutLeft> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-    );
+    return Container();
   }
 }

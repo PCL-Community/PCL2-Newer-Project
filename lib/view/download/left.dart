@@ -10,8 +10,6 @@ class DownloadLeft extends StatefulWidget {
 class _DownloadLeftState extends State<DownloadLeft> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-    );
+    return Container();
   }
 }

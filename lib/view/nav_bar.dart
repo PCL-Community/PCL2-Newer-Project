@@ -23,28 +23,34 @@ class _NavbuttonState extends State<_Navbutton> {
 
   void updateListen() {
     setState(() {
-      currentPage = currentPageListen.value; 
+      currentPage = currentPageListen.value;
     });
   }
+
   @override
   void initState() {
     super.initState();
     currentPageListen.addListener(updateListen);
   }
+
   @override
   void dispose() {
     currentPageListen.removeListener(updateListen);
     super.dispose();
   }
+
   bool isHovered = false;
   @override
   Widget build(BuildContext context) {
     final backColor = isHovered
         ? Color.fromARGB(255, 64, 144, 227)
-        : Colors.transparent;
-    final activeBackColor = Colors.white;
+        : Color.fromARGB(255, 17, 111, 205);
+    final activeBackColor =
+        darkModeListen.value ? Color.fromARGB(255, 10, 10, 10) : Colors.white;
     final fontColor = widget.index == currentPage
-        ? Color.fromARGB(255, 64, 144, 227)
+        ? darkModeListen.value
+            ? Colors.white
+            : Color.fromARGB(255, 64, 144, 227)
         : Colors.white;
     return MouseRegion(
       onHover: (event) => setState(() => isHovered = true),

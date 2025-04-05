@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pcl2_newer/logic/change_body.dart';
 
 class MyNormalButton extends StatefulWidget {
   final VoidCallback onClick;
@@ -17,12 +18,14 @@ class MyNormalButton extends StatefulWidget {
   @override
   State<MyNormalButton> createState() => _MyNormalButtonState();
 }
+
 class _MyNormalButtonState extends State<MyNormalButton> {
   bool _isHovered = false;
   bool _isPressed = false;
   @override
   Widget build(BuildContext c) {
     return MouseRegion(
+      cursor: SystemMouseCursors.click,
       onHover: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
       child: GestureDetector(
@@ -34,7 +37,13 @@ class _MyNormalButtonState extends State<MyNormalButton> {
           decoration: BoxDecoration(
             border: Border.all(color: Color.fromARGB(255, 51, 62, 72)),
             borderRadius: BorderRadius.all(Radius.circular(10)),
-            color: _isHovered ? Color.fromARGB(200, 180, 255, 255) : Color.fromARGB(180, 255, 255, 180),
+            color: _isHovered
+                ? darkModeListen.value
+                    ? Color.fromARGB(220, 69, 75, 79)
+                    : Color.fromARGB(220, 222, 236, 253)
+                : darkModeListen.value
+                    ? Color.fromARGB(220, 58, 58, 59)
+                    : Color.fromARGB(220, 245, 248, 252),
           ),
           duration: Duration(milliseconds: widget.duration),
           width: widget.width,

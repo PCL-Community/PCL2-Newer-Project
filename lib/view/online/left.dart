@@ -10,8 +10,6 @@ class OnlineLeft extends StatefulWidget {
 class _OnlineLeftState extends State<OnlineLeft> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-    );
+    return Container();
   }
 }

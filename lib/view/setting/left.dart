@@ -10,8 +10,6 @@ class SettingLeft extends StatefulWidget {
 class _SettingLeftState extends State<SettingLeft> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-    );
+    return Container();
   }
 }

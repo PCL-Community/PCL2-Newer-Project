@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pcl2_newer/view/body.dart';
 import 'package:pcl2_newer/view/nav_bar.dart';
+import 'package:pcl2_newer/logic/change_body.dart';
 // ignore: depend_on_referenced_packages
 import 'package:window_manager/window_manager.dart';
 
@@ -27,11 +28,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'PCL II Newer Project',
       theme: ThemeData(
-        colorScheme:
-            ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 203, 224, 247)),
-        useMaterial3: true,
-        fontFamily: "PCL-English"
-      ),
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: darkModeListen.value
+                ? Color.fromARGB(255, 7, 20, 35)
+                : Color.fromARGB(255, 203, 224, 247),
+          ),
+          useMaterial3: true,
+          fontFamily: "PCL-English"),
       home: const MyHomePage(),
     );
   }
@@ -48,7 +51,9 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 203, 224, 247),
+      backgroundColor: darkModeListen.value
+          ? Color.fromARGB(255, 7, 20, 35)
+          : Color.fromARGB(255, 203, 224, 247),
       appBar: NavBar(),
       body: Body(),
     );

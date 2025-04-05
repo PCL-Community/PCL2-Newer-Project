@@ -23,11 +23,13 @@ class _BodyState extends State<Body> {
       forwardPage = currentPageListen.value;
     });
   }
+
   @override
   void initState() {
     super.initState();
     currentPageListen.addListener(updateListen);
   }
+
   @override
   void dispose() {
     currentPageListen.removeListener(updateListen);
@@ -47,7 +49,9 @@ class _BodyState extends State<Body> {
           child: Container(
             width: 300,
             height: double.infinity,
-            color: Color.fromARGB(255, 245, 248, 252),
+            color: darkModeListen.value
+                ? Color.fromARGB(255, 41, 41, 43)
+                : Color.fromARGB(255, 245, 248, 252),
             child: HomeLeft(),
           ),
         ),
@@ -70,7 +74,9 @@ class _BodyState extends State<Body> {
           child: Container(
             width: 150,
             height: double.infinity,
-            color: Color.fromARGB(255, 245, 248, 252),
+            color: darkModeListen.value
+                ? Color.fromARGB(255, 41, 41, 43)
+                : Color.fromARGB(255, 245, 248, 252),
             child: DownloadLeft(),
           ),
         ),
@@ -93,7 +99,9 @@ class _BodyState extends State<Body> {
           child: Container(
             width: 122,
             height: double.infinity,
-            color: Color.fromARGB(255, 245, 248, 252),
+            color: darkModeListen.value
+                ? Color.fromARGB(255, 41, 41, 43)
+                : Color.fromARGB(255, 245, 248, 252),
             child: OnlineLeft(),
           ),
         ),
@@ -116,7 +124,9 @@ class _BodyState extends State<Body> {
           child: Container(
             width: 122,
             height: double.infinity,
-            color: Color.fromARGB(255, 245, 248, 252),
+            color: darkModeListen.value
+                ? Color.fromARGB(255, 41, 41, 43)
+                : Color.fromARGB(255, 245, 248, 252),
             child: SettingLeft(),
           ),
         ),
@@ -139,7 +149,9 @@ class _BodyState extends State<Body> {
           child: Container(
             width: 150,
             height: double.infinity,
-            color: Color.fromARGB(255, 245, 248, 252),
+            color: darkModeListen.value
+                ? Color.fromARGB(255, 41, 41, 43)
+                : Color.fromARGB(255, 245, 248, 252),
             child: AboutLeft(),
           ),
         ),
