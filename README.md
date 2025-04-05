@@ -1,3 +1,5 @@
+<img src="assets/logo.png">
+
 # PCL II Newer Project
 
 一个使用Flutter写的PCL II Newer Project！
