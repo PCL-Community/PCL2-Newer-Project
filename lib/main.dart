@@ -48,14 +48,37 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> with WindowListener {
+  bool isDarkMode = false;
+  void updateDark() {
+    setState(() {
+      isDarkMode = darkModeListen.value;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    darkModeListen.addListener(updateDark);
+  }
+
+  @override
+  void dispose() {
+    darkModeListen.removeListener(updateDark);
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: darkModeListen.value
-          ? Color.fromARGB(255, 7, 20, 35)
-          : Color.fromARGB(255, 203, 224, 247),
+      backgroundColor: Colors.transparent,
       appBar: NavBar(),
-      body: Body(),
+      body: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        color: isDarkMode
+            ? Color.fromARGB(255, 7, 20, 35)
+            : Color.fromARGB(255, 203, 224, 247),
+        child: Body(),
+      ),
     );
   }
 }

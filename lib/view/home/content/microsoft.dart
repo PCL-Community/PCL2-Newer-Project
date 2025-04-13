@@ -11,15 +11,17 @@ class _MicrosoftState extends State<Microsoft> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(children: [
-        Text("微软登录"),
-        MyNormalButton(
-          onClick: () {},
-          width: 200,
-          height: 50,
-          child: Text("点我登录"),
-        ),
-      ]),
+      child: Column(
+        children: [
+          Text("微软登录"),
+          MyNormalButton(
+            onClick: () {},
+            width: 200,
+            height: 50,
+            child: Text("点我登录"),
+          ),
+        ],
+      ),
     );
   }
 }

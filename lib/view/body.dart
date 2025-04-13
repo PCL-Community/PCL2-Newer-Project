@@ -17,6 +17,7 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   int currentPage = 1;
   int forwardPage = 1;
+  bool isDarkMode = false;
   void updateListen() {
     setState(() {
       currentPage = 0;
@@ -24,15 +25,23 @@ class _BodyState extends State<Body> {
     });
   }
 
+  void updateDark() {
+    setState(() {
+      isDarkMode = darkModeListen.value;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     currentPageListen.addListener(updateListen);
+    darkModeListen.addListener(updateDark);
   }
 
   @override
   void dispose() {
     currentPageListen.removeListener(updateListen);
+    darkModeListen.removeListener(updateDark);
     super.dispose();
   }
 
@@ -46,10 +55,11 @@ class _BodyState extends State<Body> {
           onAfterLeave: () => setState(() => currentPage = forwardPage),
           offset: Offset(-300, 0),
           opacity: 0,
-          child: Container(
+          child: AnimatedContainer(
+            duration: Duration(milliseconds: 300),
             width: 300,
             height: double.infinity,
-            color: darkModeListen.value
+            color: isDarkMode
                 ? Color.fromARGB(255, 41, 41, 43)
                 : Color.fromARGB(255, 245, 248, 252),
             child: HomeLeft(),
@@ -60,10 +70,12 @@ class _BodyState extends State<Body> {
           onAfterLeave: () => setState(() => currentPage = forwardPage),
           offset: Offset(0, -screenSize.height),
           opacity: 0,
-          child: Container(
+          child: AnimatedContainer(
+            duration: Duration(milliseconds: 300),
             margin: EdgeInsets.fromLTRB(300, 0, 0, 0),
             width: screenSize.width - 300,
             height: double.infinity,
+            color: Colors.transparent,
           ),
         ),
         TransitionPage(
@@ -71,10 +83,11 @@ class _BodyState extends State<Body> {
           onAfterLeave: () => setState(() => currentPage = forwardPage),
           offset: Offset(-150, 0),
           opacity: 0,
-          child: Container(
+          child: AnimatedContainer(
+            duration: Duration(milliseconds: 300),
             width: 150,
             height: double.infinity,
-            color: darkModeListen.value
+            color: isDarkMode
                 ? Color.fromARGB(255, 41, 41, 43)
                 : Color.fromARGB(255, 245, 248, 252),
             child: DownloadLeft(),
@@ -85,10 +98,12 @@ class _BodyState extends State<Body> {
           onAfterLeave: () => setState(() => currentPage = forwardPage),
           offset: Offset(0, -screenSize.height),
           opacity: 0,
-          child: Container(
+          child: AnimatedContainer(
+            duration: Duration(milliseconds: 300),
             margin: EdgeInsets.fromLTRB(150, 0, 0, 0),
             width: screenSize.width - 150,
             height: double.infinity,
+            color: Colors.transparent,
           ),
         ),
         TransitionPage(
@@ -96,10 +111,11 @@ class _BodyState extends State<Body> {
           onAfterLeave: () => setState(() => currentPage = forwardPage),
           offset: Offset(-122, 0),
           opacity: 0,
-          child: Container(
+          child: AnimatedContainer(
+            duration: Duration(milliseconds: 300),
             width: 122,
             height: double.infinity,
-            color: darkModeListen.value
+            color: isDarkMode
                 ? Color.fromARGB(255, 41, 41, 43)
                 : Color.fromARGB(255, 245, 248, 252),
             child: OnlineLeft(),
@@ -110,10 +126,12 @@ class _BodyState extends State<Body> {
           onAfterLeave: () => setState(() => currentPage = forwardPage),
           offset: Offset(0, -screenSize.height),
           opacity: 0,
-          child: Container(
+          child: AnimatedContainer(
+            duration: Duration(milliseconds: 300),
             margin: EdgeInsets.fromLTRB(122, 0, 0, 0),
             width: screenSize.width - 122,
             height: double.infinity,
+            color: Colors.transparent,
           ),
         ),
         TransitionPage(
@@ -121,10 +139,11 @@ class _BodyState extends State<Body> {
           onAfterLeave: () => setState(() => currentPage = forwardPage),
           offset: Offset(-122, 0),
           opacity: 0,
-          child: Container(
+          child: AnimatedContainer(
+            duration: Duration(milliseconds: 300),
             width: 122,
             height: double.infinity,
-            color: darkModeListen.value
+            color: isDarkMode
                 ? Color.fromARGB(255, 41, 41, 43)
                 : Color.fromARGB(255, 245, 248, 252),
             child: SettingLeft(),
@@ -135,10 +154,12 @@ class _BodyState extends State<Body> {
           onAfterLeave: () => setState(() => currentPage = forwardPage),
           offset: Offset(0, -screenSize.height),
           opacity: 0,
-          child: Container(
+          child: AnimatedContainer(
+            duration: Duration(milliseconds: 300),
             margin: EdgeInsets.fromLTRB(122, 0, 0, 0),
             width: screenSize.width - 122,
             height: double.infinity,
+            color: Colors.transparent,
           ),
         ),
         TransitionPage(
@@ -146,10 +167,11 @@ class _BodyState extends State<Body> {
           onAfterLeave: () => setState(() => currentPage = forwardPage),
           offset: Offset(-150, 0),
           opacity: 0,
-          child: Container(
+          child: AnimatedContainer(
+            duration: Duration(milliseconds: 300),
             width: 150,
             height: double.infinity,
-            color: darkModeListen.value
+            color: isDarkMode
                 ? Color.fromARGB(255, 41, 41, 43)
                 : Color.fromARGB(255, 245, 248, 252),
             child: AboutLeft(),
@@ -160,10 +182,12 @@ class _BodyState extends State<Body> {
           onAfterLeave: () => setState(() => currentPage = forwardPage),
           offset: Offset(0, -screenSize.height),
           opacity: 0,
-          child: Container(
+          child: AnimatedContainer(
+            duration: Duration(milliseconds: 300),
             margin: EdgeInsets.fromLTRB(150, 0, 0, 0),
             width: screenSize.width - 150,
             height: double.infinity,
+            color: Colors.transparent,
           ),
         ),
       ],

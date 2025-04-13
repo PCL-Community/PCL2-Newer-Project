@@ -29,6 +29,7 @@ class _HomeLeftState extends State<HomeLeft> {
   void initState() {
     super.initState();
     currentAccountListen.addListener(updateListen);
+    currentAccount = currentAccountListen.value;
   }
 
   @override
@@ -54,21 +55,21 @@ class _HomeLeftState extends State<HomeLeft> {
                   text: "正版",
                   index: 1,
                   onPressed: () => currentAccountListen.value = 1,
-                  isChecked: currentAccountListen.value == 1,
+                  isChecked: currentAccount == 1,
                 ),
                 MyCheckButton(
                   iconData: Icons.medication_outlined,
                   text: "离线",
                   index: 2,
                   onPressed: () => currentAccountListen.value = 2,
-                  isChecked: currentAccountListen.value == 2,
+                  isChecked: currentAccount == 2,
                 ),
                 MyCheckButton(
                   iconData: Icons.account_box_rounded,
                   text: "外置",
                   index: 3,
                   onPressed: () => currentAccountListen.value = 3,
-                  isChecked: currentAccountListen.value == 3,
+                  isChecked: currentAccount == 3,
                 ),
               ],
             ),

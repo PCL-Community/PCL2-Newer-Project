@@ -20,6 +20,7 @@ class _Navbutton extends StatefulWidget {
 
 class _NavbuttonState extends State<_Navbutton> {
   int currentPage = 1;
+  bool isDarkMode = false;
 
   void updateListen() {
     setState(() {
@@ -27,15 +28,23 @@ class _NavbuttonState extends State<_Navbutton> {
     });
   }
 
+  void updateDark() {
+    setState(() {
+      isDarkMode = darkModeListen.value;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     currentPageListen.addListener(updateListen);
+    darkModeListen.addListener(updateDark);
   }
 
   @override
   void dispose() {
     currentPageListen.removeListener(updateListen);
+    darkModeListen.removeListener(updateDark);
     super.dispose();
   }
 
@@ -46,9 +55,9 @@ class _NavbuttonState extends State<_Navbutton> {
         ? Color.fromARGB(255, 64, 144, 227)
         : Color.fromARGB(255, 17, 111, 205);
     final activeBackColor =
-        darkModeListen.value ? Color.fromARGB(255, 10, 10, 10) : Colors.white;
+        isDarkMode ? Color.fromARGB(255, 10, 10, 10) : Colors.white;
     final fontColor = widget.index == currentPage
-        ? darkModeListen.value
+        ? isDarkMode
             ? Colors.white
             : Color.fromARGB(255, 64, 144, 227)
         : Colors.white;
