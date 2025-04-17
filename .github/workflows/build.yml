@@ -17,6 +17,8 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
+      - name: Initialize Project
+        run: flutter create --platforms=windows,macos,linux --no-overwrite .
       - name: Start Build
         run: |
           flutter pub get
