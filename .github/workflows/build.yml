@@ -20,8 +20,10 @@ jobs:
       - name: Start Build
         run: |
           flutter pub get
-          flutter build windows
-          flutter build linux
-          flutter build macos
+          case "${{ runner.os }}" in
+            Linux)   flutter build linux --release ;;
+            macOS)   flutter build macos --release ;;
+            Windows) flutter build windows --release ;;
+          esac
       # - name: Pack all by zip
       #   run: |
