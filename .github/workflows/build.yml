@@ -36,11 +36,14 @@ jobs:
         run: |
           mkdir releases
           if ("${{ runner.os }}" -eq "Linux") {
-            zip -9 -r "./releases/PCL-Newer-Project-Linux.zip" "build/linux/x64/release/bundle"
+            cd build/linux/x64/release/bundle
+            zip -9 -r "../../../../../releases/PCL-Newer-Project-Linux.zip" .
           } elseif ("${{ runner.os }}" -eq "macOS") {
-            zip -9 -r "./releases/PCL-Newer-Project-macOS.zip" "build/macos/Build/Products/Release"
+            cd build/macos/Build/Products/Release
+            zip -9 -r "../../../../../releases/PCL-Newer-Project-macOS.zip" .
           } else {
-            7z a "./releases/PCL-Newer-Project-Windows.zip" "build/windows/x64/runner/Release/*"
+            cd build/windows/x64/runner/Release
+            7z a "../../../../../releases/PCL-Newer-Project-Windows.zip" ./*
           }
         shell: pwsh
       - name: Upload all Artifacts
