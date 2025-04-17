@@ -32,5 +32,19 @@ jobs:
             flutter build windows --release
           }
         shell: pwsh
-      # - name: Pack all by zip
-      #   run: |
+      - name: Zip all releases
+        run: |
+          mkdir releases
+          if ("${{ runner.os }}" -eq "Linux") {
+            zip -9 -r "./releases/PCL-Newer-Project-Linux.zip" "build/linux/x64/release/bundle"
+          } elseif ("${{ runner.os }}" -eq "macOS") {
+            zip -9 -r "./releases/PCL-Newer-Project-macOS.zip" "build/macos/Build/Products/Release"
+          } else {
+            7z a "./releases/PCL-Newer-Project-Windows.zip" "build/windows/x64/runner/Release/*"
+          }
+        shell: pwsh
+      - name: Upload all Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ runner.os }}-bundle
+          path: ./releases/PCL-Newer-Project-${{ runner.os }}.zip
