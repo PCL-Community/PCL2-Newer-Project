@@ -13,6 +13,7 @@ void main() async {
     center: true,
     titleBarStyle: TitleBarStyle.hidden,
     minimumSize: Size(784, 440),
+    windowButtonVisibility: false,
   );
   windowManager.waitUntilReadyToShow(windowOptions, () async {
     await windowManager.show();
