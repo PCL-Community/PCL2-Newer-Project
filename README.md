@@ -1,4 +1,4 @@
-![logo](assets/logo.png)
+![logo](assets/logo2.png)
 
 # PCL II Newer Project
 
@@ -19,3 +19,7 @@
 目前，第一个可用的版本预计在2026年7月份发布！
 
 如果你想讨论Newer的任何事情，欢迎加群：435225858
+
+## 鸣谢人员
+
+1. 非常感谢[IceFire_Icer](https://space.bilibili.com/393107707)提供的Logo！
